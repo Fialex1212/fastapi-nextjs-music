@@ -1,0 +1,5 @@
+venv
+backend/api_geteway/.env
+backend/user_services/.env
+backend/music_services/.env
+backend/playlist_services/.env
