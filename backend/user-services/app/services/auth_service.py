@@ -1,14 +1,19 @@
-from models.schemas import UserLogin, UserWithToken
-from models.models import User
-from sqlalchemy.orm import Session
-from fastapi import HTTPException
-from app.utils.security import verify_password, create_access_token
-from db.crud import get_user_by_email
-from app.utils.redis import r
-from app.utils.security import OAUTH2_SCHEME, SECRET_KEY, ALGORITHM
-from app.deps import get_db
-from fastapi import Depends
+from fastapi import Depends, HTTPException
 from jose import JWTError, jwt
+from sqlalchemy.orm import Session
+
+from app.deps import get_db
+from app.utils.redis import r
+from app.utils.security import (
+    ALGORITHM,
+    OAUTH2_SCHEME,
+    SECRET_KEY,
+    create_access_token,
+    verify_password,
+)
+from db.crud import get_user_by_email
+from models.models import User
+from models.schemas import UserLogin, UserWithToken
 
 TOKEN_EXPIRE_TIME = 60 * 30  # IN SEDONCS 1800s, IN MINUTES 30m
 
@@ -23,6 +28,9 @@ def login(data: UserLogin, db: Session) -> UserWithToken:
 
     return UserWithToken(id=user.id, email=user.email, access_token=token)
 
+def logout(token: str = Depends(OAUTH2_SCHEME)):
+    r.delete(token)
+    return {"detail": "Logged out"}
 
 def get_current_user(
     token: str = Depends(OAUTH2_SCHEME), db: Session = Depends(get_db)

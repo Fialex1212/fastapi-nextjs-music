@@ -1,8 +1,11 @@
-from pydantic import BaseModel, EmailStr, field_validator, ConfigDict
+from pydantic import BaseModel, EmailStr, field_validator
+from typing import Optional
+
 # import uuid
 
 
 class UserCreate(BaseModel):
+    username: str
     email: EmailStr
     password: str
 
@@ -20,16 +23,18 @@ class UserLogin(BaseModel):
 
 class UserOut(BaseModel):
     id: int
+    username: str
     email: EmailStr
+    avatar_key: Optional[str] = None
+    avatar_url: Optional[str] = None
 
-    # model_config = ConfigDict(
-    #     from_attributes=True,
-    #     json_encoders={uuid.UUID: lambda v: str(v)}
-    # )
+    class Config:
+        from_attributes = True
 
 
 class Token(BaseModel):
     access_token: str
+
 
 class UserWithToken(UserOut):
     access_token: str

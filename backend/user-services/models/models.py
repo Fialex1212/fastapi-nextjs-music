@@ -9,4 +9,7 @@ class User(Base):
     # id = Column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4)
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, index=True)
-    hashed_password = Column(String)
+    username = Column(String, unique=True, index=True, nullable=False)
+    avatar_key = Column(String, nullable=True)
+    avatar_url = Column(String, nullable=True)
+    hashed_password = Column(String)    
