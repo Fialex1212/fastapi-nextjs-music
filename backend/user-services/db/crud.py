@@ -5,21 +5,45 @@ from models.schemas import UserCreate
 from app.utils.security import hash_password
 from fastapi import HTTPException
 from app.utils.minio import minio_client
+from app.utils.generate_avatar import generate_avatar
+import io
 
 
 def create_user(user: UserCreate, db: Session):
     db_user = db.query(User).filter(User.email == user.email).first()
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
+
     new_user = User(
         username=user.username,
         email=user.email,
         hashed_password=hash_password(user.password),
     )
+
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return new_user
+
+    try:
+        avatar_bytes, filename = generate_avatar(user.username)
+        file_obj = io.BytesIO(avatar_bytes)
+        file_ext = ".png"
+        avatar_key = minio_client.upload_avatar(
+            file=file_obj, user_id=new_user.id, file_extension=file_ext
+        )
+    except Exception as ex:
+        print(ex)
+        raise HTTPException(status_code=500, detail="Faild to upload avatar")
+
+    updated_user = update_user_avatar(db=db, user_id=new_user.id, avatar=avatar_key)
+
+    return UserOut(
+        id=updated_user.id,
+        email=updated_user.email,
+        username=updated_user.username,
+        avatar_key=updated_user.avatar_key,
+        avatar_url=minio_client.get_avatar_url(updated_user.avatar_key),
+    )
 
 
 def get_user(user_id: str, db: Session):
@@ -60,5 +84,3 @@ def update_user_avatar(db: Session, user_id: int, avatar: str):
     db.commit()
     db.refresh(user)
     return user
-
-
