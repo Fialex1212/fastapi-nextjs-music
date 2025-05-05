@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from .api import users
-from .api import auth
+from api import users
+from api import auth
 from db.init_db import lifespan
 
 app = FastAPI(lifespan=lifespan)

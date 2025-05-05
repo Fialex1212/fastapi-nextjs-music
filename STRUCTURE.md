@@ -13,36 +13,37 @@
 │   ├── package.json            # 📦 NPM dependencies and scripts
 │   └── .env                    # 🔐 Environment variables
 │
-├── gateway/                    # 🚪 API Gateway (FastAPI)
-│   ├── app/                    # ⚙️ Core application logic
-│   ├── routes/                 # 🔀 API routing
-│   ├── Dockerfile              # 🐳 Dockerfile for API Gateway
-│   ├── requirements.txt        # 📦 Python dependencies
-│   └── .env                    # 🔐 Environment variables
-│
-├── user-service/               # 👤 User management service (FastAPI)
-│   ├── app/                    # ⚙️ Business logic
-│   ├── models/                 # 📚 Data models (Pydantic/ORM)
-│   ├── db/                     # 🗄️ Database interaction
-│   ├── Dockerfile              # 🐳 Dockerfile
-│   ├── requirements.txt        # 📦 Python dependencies
-│   └── .env                    # 🔐 Environment variables
-│
-├── track-service/              # 🎵 Music content service (FastAPI)
-│   ├── app/
-│   ├── models/
-│   ├── db/
-│   ├── Dockerfile
-│   ├── requirements.txt
-│   └── .env
-│
-├── playlist-service/           # 📀 Playlist management service (FastAPI)
-│   ├── app/
-│   ├── models/
-│   ├── db/
-│   ├── Dockerfile
-│   ├── requirements.txt
-│   └── .env
+├── backend/   
+│   ├── gateway/                    # 🚪 API Gateway (FastAPI)
+│   │   ├── app/                    # ⚙️ Core application logic
+│   │   ├── routes/                 # 🔀 API routing
+│   │   ├── Dockerfile              # 🐳 Dockerfile for API Gateway
+│   │   ├── requirements.txt        # 📦 Python dependencies
+│   │   └── .env                    # 🔐 Environment variables
+│   │
+│   ├── user-service/               # 👤 User management service (FastAPI)
+│   │   ├── app/                    # ⚙️ Business logic
+│   │   ├── models/                 # 📚 Data models (Pydantic/ORM)
+│   │   ├── db/                     # 🗄️ Database interaction
+│   │   ├── Dockerfile              # 🐳 Dockerfile
+│   │   ├── requirements.txt        # 📦 Python dependencies
+│   │   └── .env                    # 🔐 Environment variables
+│   │
+│   ├── track-service/              # 🎵 Music content service (FastAPI)
+│   │   ├── app/
+│   │   ├── models/
+│   │   ├── db/
+│   │   ├── Dockerfile
+│   │   ├── requirements.txt
+│   │   └── .env
+│   │
+│   ├── playlist-service/           # 📀 Playlist management service (FastAPI)
+│   │   ├── app/
+│   │   ├── models/
+│   │   ├── db/
+│   │   ├── Dockerfile
+│   │   ├── requirements.txt
+│   └── └── .env
 │
 ├── nginx/                      # 🌐 NGINX for request proxying
 │   ├── conf/                   # ⚙️ NGINX configuration files
