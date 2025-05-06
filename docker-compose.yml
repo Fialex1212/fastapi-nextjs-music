@@ -13,27 +13,27 @@ services:
   #   volumes:
   #     - ./frontend/music-app:/app
 
-  user-service:
-    build: ./backend/user-service
-    container_name: user-service
-    restart: always
-    ports:
-      - "8001:8001"
-    depends_on:
-      postgresql:
-        condition: service_healthy
-      minio:
-        condition: service_healthy
+  # user-service:
+  #   build: ./backend/user-service
+  #   container_name: user-service
+  #   restart: always
+  #   ports:
+  #     - "8001:8001"
+  #   depends_on:
+  #     postgresql:
+  #       condition: service_healthy
+  #     minio:
+  #       condition: service_healthy
 
 
-  getaway:
-    build: ./backend/getaway
-    container_name: getaway
-    restart: always
-    ports:
-      - "8000:8000"
-    depends_on:
-      - user-service
+  # getaway:
+  #   build: ./backend/getaway
+  #   container_name: getaway
+  #   restart: always
+  #   ports:
+  #     - "8000:8000"
+  #   depends_on:
+  #     - user-service
 
   postgresql:
     build: ./postgres

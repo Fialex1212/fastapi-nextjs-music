@@ -43,6 +43,38 @@
 │   │   ├── db/
 │   │   ├── Dockerfile
 │   │   ├── requirements.txt
+│   │   └── .env
+│   │
+│   ├── albums-service/           # 📀 Albums management service (FastAPI)
+│   │   ├── app/
+│   │   ├── models/
+│   │   ├── db/
+│   │   ├── Dockerfile
+│   │   ├── requirements.txt
+│   │   └── .env
+│   │
+│   ├── payment-service/           # 📀 Payment service (FastAPI)
+│   │   ├── app/
+│   │   ├── models/
+│   │   ├── db/
+│   │   ├── Dockerfile
+│   │   ├── requirements.txt
+│   │   └── .env
+│   │
+│   ├── search-service/           # 📀 Search service (FastAPI)
+│   │   ├── app/
+│   │   ├── models/
+│   │   ├── db/
+│   │   ├── Dockerfile
+│   │   ├── requirements.txt
+│   │   └── .env
+│   │
+│   ├── settings-service/           # 📀 Settings service (FastAPI)
+│   │   ├── app/
+│   │   ├── models/
+│   │   ├── db/
+│   │   ├── Dockerfile
+│   │   ├── requirements.txt
 │   └── └── .env
 │
 ├── nginx/                      # 🌐 NGINX for request proxying
