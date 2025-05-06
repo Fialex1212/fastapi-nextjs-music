@@ -1,13 +1,7 @@
-from db.session import engine, Base
-from models.models import User
-from fastapi import FastAPI
-from contextlib import asynccontextmanager
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    print("Создание таблиц...")
-    Base.metadata.create_all(bind=engine)
-    print("Таблицы созданы (или уже существуют).")
-    
-    yield
+engine = create_engine("postgresql://user:password@postgresql:5432/musicdb")
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base = declarative_base()

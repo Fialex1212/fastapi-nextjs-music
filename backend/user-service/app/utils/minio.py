@@ -2,6 +2,9 @@ from minio import Minio
 import os
 from fastapi import HTTPException
 from datetime import timedelta
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class MinIOClient:
     def __init__(self):
