@@ -66,7 +66,17 @@ def get_user_by_email(email: str, db: Session):
     user = db.query(User).filter(User.email == email).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    return user
+    avatar_url = None
+    if user.avatar_key:
+        avatar_url = minio_client.get_avatar_url(user.avatar_key)
+    return UserOut(
+        id=user.id,
+        email=user.email,
+        username=user.username,
+        avatar_key=user.avatar_key,
+        avatar_url=avatar_url,
+    )
+
 
 
 def get_users_list(db: Session):

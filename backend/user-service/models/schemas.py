@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr, field_validator
 from typing import Optional
+from app.utils.minio import minio_client
 
 # import uuid
 
@@ -27,6 +28,12 @@ class UserOut(BaseModel):
     email: EmailStr
     avatar_key: Optional[str] = None
     avatar_url: Optional[str] = None
+
+    @property
+    def avatar_url(self):
+        if self.avatar_url:
+            return minio_client.get_avatar_url(self.avatar_key)
+        return None
 
     class Config:
         from_attributes = True

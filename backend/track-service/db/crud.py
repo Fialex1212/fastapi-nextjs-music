@@ -84,6 +84,18 @@ def get_track(track_id: int, db: Session):
     )
 
 
+def get_tracks(db: Session):
+    pass
+
+
+def update_track(track_id: int, db: Session):
+    pass
+
+
+def delete_track(track_id: int, db: Session):
+    pass
+
+
 def update_cover(track_id: int, db: Session, cover_key: str):
     db_track = get_track(track_id, db)
     if not db_track:

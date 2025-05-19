@@ -1,5 +1,4 @@
 services:
-
   # frontend:
   #   build:
   #     context: ./frontend/music-app
@@ -47,6 +46,71 @@ services:
       postgresql:
         condition: service_healthy
 
+  # settings-service:
+  #   build: ./backend/settings-service
+  #   container_name: settings-service
+  #   command: uvicorn app.main:app --host 0.0.0.0 --port 8003 --reload
+  #   restart: always
+  #   ports:
+  #     - "8003:8003"
+  #   depends_on:
+  #     minio:
+  #       condition: service_healthy
+  #     postgresql:
+  #       condition: service_healthy
+
+  # search-service:
+  #   build: ./backend/search-service
+  #   container_name: search-service
+  #   command: uvicorn app.main:app --host 0.0.0.0 --port 8004 --reload
+  #   restart: always
+  #   ports:
+  #     - "8004:8004"
+  #   depends_on:
+  #     minio:
+  #       condition: service_healthy
+  #     postgresql:
+  #       condition: service_healthy
+
+  # playlist-service:
+  #   build: ./backend/playlist-service
+  #   container_name: playlist-service
+  #   command: uvicorn app.main:app --host 0.0.0.0 --port 8005 --reload
+  #   restart: always
+  #   ports:
+  #     - "8005:8005"
+  #   depends_on:
+  #     minio:
+  #       condition: service_healthy
+  #     postgresql:
+  #       condition: service_healthy
+
+  # payment-service:
+  #   build: ./backend/payment-service
+  #   container_name: payment-service
+  #   command: uvicorn app.main:app --host 0.0.0.0 --port 8006 --reload
+  #   restart: always
+  #   ports:
+  #     - "8006:8006"
+  #   depends_on:
+  #     minio:
+  #       condition: service_healthy
+  #     postgresql:
+  #       condition: service_healthy
+
+  # albums-service:
+  #   build: ./backend/albums-service
+  #   container_name: albums-service
+  #   command: uvicorn app.main:app --host 0.0.0.0 --port 8007 --reload
+  #   restart: always
+  #   ports:
+  #     - "8007:8007"
+  #   depends_on:
+  #     minio:
+  #       condition: service_healthy
+  #     postgresql:
+  #       condition: service_healthy
+
   postgresql:
     build: ./postgres
     environment:
@@ -64,7 +128,7 @@ services:
   redis:
     build: ./redis
     ports:
-     - "6379:6379"
+      - "6379:6379"
     volumes:
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
 

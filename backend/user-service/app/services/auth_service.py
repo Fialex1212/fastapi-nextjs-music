@@ -26,7 +26,7 @@ def login(data: UserLogin, db: Session) -> UserWithToken:
 
     r.set(token, user.email, ex=TOKEN_EXPIRE_TIME)
 
-    return UserWithToken(id=user.id, email=user.email, access_token=token)
+    return UserWithToken(id=user.id, email=user.email, username=user.username, access_token=token)
 
 def logout(token: str = Depends(OAUTH2_SCHEME)):
     r.delete(token)

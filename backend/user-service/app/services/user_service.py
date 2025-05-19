@@ -26,7 +26,8 @@ def get_user_by_email(email: str, db: Session) -> UserOut:
 
 
 def get_users_list(db: Session) -> List[UserOut]:
-    return crud.get_users_list(db)
+    users = crud.get_users_list(db)
+    return [UserOut.model_validate(user) for user in users]
 
 
 def update_user_avatar(user_id: int, file: UploadFile, db: Session) -> UserOut:
@@ -73,7 +74,7 @@ def delete_user_avatar(user_id: int, db: Session) -> UserOut:
     user = crud.get_user(user_id, db)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    
+
     try:
         if user.avatar_key:
             minio_client.delete_avatar(user.avatar_key)
