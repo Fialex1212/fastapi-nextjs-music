@@ -7,7 +7,7 @@ import DropDown from "../DropDown";
 import { Bell, ChevronDown, Ellipsis, Mail } from "lucide-react";
 
 const Header = () => {
-  const user = true;
+  const user = false;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
 
@@ -17,10 +17,13 @@ const Header = () => {
       <Link href="/home">Home</Link>
       <Link href="/library">Library</Link>
       <SearchBar />
-      <Link href="/upload">Upload</Link>
       <div className="">
         {user ? (
           <div className="flex justify-center items-center gap-6">
+            <Link href="/upload">Upload</Link>
+            <Link className="text-[#f87e24]" href={"/subscription/buy"}>
+              Try Pro Subscription
+            </Link>
             <DropDown
               isOpen={isUserOpen}
               setIsOpen={setIsUserOpen}
@@ -55,11 +58,17 @@ const Header = () => {
             <Bell />
           </div>
         ) : (
-          <div className="flex gap-6">
+          <div className="flex items-center gap-6">
             <Link className="" href={"/sign-in"}>
               Sign in
             </Link>
-            <Link href={"/sign-up"}>Create account</Link>
+            <Link
+              className="bg-[#ffffff] text-[#000000] p-1 rounded-[4px]"
+              href={"/sign-up"}
+            >
+              Create account
+            </Link>
+            <Link href="/upload">Upload</Link>
           </div>
         )}
       </div>
